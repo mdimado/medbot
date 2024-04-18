@@ -1,0 +1,115 @@
+.sect__bg{
+    background-color: #fff;
+}
+
+.auth__form{
+    background-color: #fff;
+    padding: 0px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+}
+
+.auth__form p{
+    margin-top: 30px;
+}
+
+.auth__form p a{
+    color: var(--primary-color);
+}
+.auth__form input{
+    border-radius: 50px;
+}
+
+.auth__form input[type='file']{
+    border: none;
+}
+
+.auth__form input::file-selector-button {
+    border: 1px solid var(--primary-color);
+    background-color: #fff;
+    padding: 05px;
+    border-radius: 50px;
+}
+
+.auth__form .test{
+    display: flex;
+    align-items: center;
+    text-align: center !important;
+    width: 100% !important;
+}
+
+.auth__form .g__button{
+    background-color: #fff;
+    color: var(--primary-color);
+
+}
+
+.auth__form .g__button:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+
+}
+
+.auth__form .buy__button img{
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    
+}
+
+.auth__form label{
+    padding-left: 22px;
+}
+
+.checkbox{
+    text-align: left;
+}
+
+.checkbox__link{
+    color: var(--primary-color) !important;
+}
+
+.button_ok{
+    display: none;
+}
+
+.pp_choose{
+    border: 1px solid var(--primary-color);
+    padding: 8px;
+    border-radius: 50px;
+    width: 100% !important;
+}
+
+.pp_choose:hover{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.google_btn{
+    color: var(--primary-color);
+    background-color: #fff;
+    box-shadow: none !important;
+    border: 1px solid var(--primary-color);
+}
+
+.google_btn:hover{
+    color: #fff;
+    background-color: var(--primary-color);
+    box-shadow: none !important;
+    border: 1px solid var(--primary-color);
+}
+.OR{
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width:425px){
+    .auth__form{
+        padding: 15px;
+    }
+    .pp_choose{
+        border-radius: 20px;
+    }
+
+    
+
+}

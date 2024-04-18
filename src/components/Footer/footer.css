@@ -1,0 +1,53 @@
+
+
+.footer{
+    padding-top: 60px;
+    padding-bottom: 30px;
+    background: var(--hero-bg);
+}
+
+.footer__text{
+    line-height: 30px;
+    text-align: center !important;
+    
+}
+
+.footer__quick-links ul li{
+    background: transparent !important;
+
+}
+
+.quick__links-title{
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.footer__contact li span{
+    font-size: 1.2rem;
+
+}
+
+.footer__contact li p{
+    font-size: 9.9rem;
+}
+
+.footer__copyright{
+    font-size: 0.9rem;
+    margin-top: 50px;
+    text-align: center !important;
+}
+
+.socialp{
+    font-size: 30px;
+    text-align: center !important ;
+}
+.socialp:hover{
+    color: var(--primary-color);
+}
+.socialp i:hover{
+    color: var(--primary-color);
+}
+
+.socialp i{
+    margin: 0px 20px;
+}
