@@ -103,12 +103,12 @@
 
 .input input:focus{
     outline: none;
-    border: 1px solid #828080;
+
 }
 
 .send{
-    background-color: #9456ff;
-    color: #fff;
+    background: #ECECEC ;
+    color:  #828080 ;
     font-size: 25px;
     height: 50px ;
     display: flex;
@@ -118,6 +118,12 @@
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 }
+
+.send i{
+    cursor: pointer;
+    
+}
+
 
 
 .modelcont{
@@ -201,6 +207,12 @@
 
 .bot_p p{
     color: #000;
+}
+
+
+
+.send.active{
+    color: #9456ff;
 }
 
 
