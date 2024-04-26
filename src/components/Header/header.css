@@ -46,7 +46,7 @@
 }
 
 .nav__item a{
-    color: black;
+    color: #dbd9d9;
     font-weight: 500;
     cursor: pointer;
 
@@ -108,7 +108,7 @@
 .nav__icons .profile .profile__actions{
     position: absolute;
     top: 100%;
-    left: 150;
+    right: 1px;
     width: 150px;
     z-index: 10;
     padding: 15px;

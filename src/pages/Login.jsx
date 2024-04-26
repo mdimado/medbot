@@ -1,66 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase.config';
+import React, { useState, useEffect } from "react";
+import Helmet from '../components/Helmet/Helmet';
+import { Container, Row, Col, Form, FormGroup } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from '../firebase.config';
+import { auth } from "../firebase.config";
+import { toast } from 'react-toastify';
+import '../styles/login.css';
 
-function DoctorLogin() {
+const Login = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        navigate('/chatbot');
-      }
-    });
-    return () => unsubscribe();
-  }, [navigate]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'email') setEmail(value);
-    else if (name === 'password') setPassword(value);
-  };
-
-  const handleSubmit = async (e) => {
+  const signInWithEmail = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      console.log("User logged in with email:", user.email);
+      await signInWithEmailAndPassword(auth, email, password);
 
-      const doctorRef = doc(db, "doctors", user.uid); // Use user's UID as document ID
-      const doctorSnap = await getDoc(doctorRef);
-      
-      if (doctorSnap.exists()) {
-        const doctorData = doctorSnap.data();
-        console.log("Doctor's details:", doctorData);
-      } else {
-        console.log("No doctor data found for this user.");
-      }
-
+      setLoading(false);
+      toast.success('Login successful');
       navigate('/chatbot');
-
     } catch (error) {
-      console.error("Error in user login:", error);
-      setError("Login failed: " + error.message);
+      setLoading(false);
+      if (error.code === "auth/user-not-found") {
+        toast.error('User not found. Please sign up to continue.');
+      } else if (error.code === "auth/wrong-password") {
+        toast.error('Wrong password. Please try again.');
+      } else {
+        toast.error('An error occurred. Please try again later.');
+      }
     }
   };
-  
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Doctor Login</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <input type="email" name="email" value={email} onChange={handleInputChange} placeholder="Email" required />
-      <input type="password" name="password" value={password} onChange={handleInputChange} placeholder="Password" required />
-      <button type="submit">Login</button>
-    </form>
-  );
-}
 
-export default DoctorLogin;
+  
+
+  return (
+    <Helmet title='Login'>
+      <section className="sect__bg">
+        <Container>
+          <Row>
+            {loading ? (
+              <Col lg='12' className="text-center">
+                <h5 className="fw-bold">Loading...</h5>
+              </Col>
+            ) : (
+              <Col lg='6' className="m-auto text-center">
+                <h3 className="fw-bold fs-2 mb-4 dochead">Welcome Back!</h3>
+                <h6 className="mb-4">Login to continue</h6>
+
+                <Form className="auth__form" onSubmit={signInWithEmail}>
+                 
+                  <FormGroup className="form__group">
+                    <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} />
+                  </FormGroup>
+                  <FormGroup className="form__group">
+                    <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                  </FormGroup>
+
+                  <button type="submit" className="buy__button auth__btn">Let's go</button>
+                  <p>Don't have an account? <Link to='/signup'>Sign Up</Link></p>
+                </Form>
+              </Col>
+            )}
+          </Row>
+        </Container>
+      </section>
+    </Helmet>
+  );
+};
+
+export default Login;

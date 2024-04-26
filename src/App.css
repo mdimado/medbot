@@ -4,11 +4,11 @@
 /*  css variables */
 :root {
 
-  --primary-color: #004643;
+  --primary-color: #fff;
   --hero-bg: #edf6f9 ;
   --heading-fontSize: 2rem;
   --small-text-color: #999;
-  --heading-text-color: #0a1d37;
+  --heading-text-color: #fff;
 }
 
 /* reset browser default */
@@ -23,6 +23,8 @@ body {
   background-image: url("../src/assets/images/bbblurry.svg");   
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #0a1d37;
+
 }
 
 h1,
@@ -34,6 +36,7 @@ h6,
 p {
   padding: 0;
   margin: 0;
+  color: #fff !important;
 }
 
 p {

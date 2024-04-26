@@ -17,11 +17,11 @@ const Routers = () => {
     <Routes>
       <Route path="/" element={<Navigate to="home" />} />
       <Route path="home" element={<Home />} />
-      <Route path="Chatbot" element={<ChatBot />} />
+     
       
 
       <Route path="/*" element={<ProtectedRoute />}>
-        
+      <Route path="Chatbot" element={<ChatBot />} />
       </Route>
 
       
