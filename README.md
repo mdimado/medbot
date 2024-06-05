@@ -1,70 +1,147 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+1. Clone this repository to your local machine:
 
-### `npm start`
+```
+git clone https://github.com/mdimado/medbot.git
+cd medbot
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### Set up Frontend
+  
+1. Change the current working directory to "frontend"
+  
+```  
+cd frontend
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Install Dependencies:
+   
+```bash
+npm install
+```
 
-### `npm run build`
+3. Set Up Firebase:
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).
+   - Obtain your Firebase config credentials.
+   - Add your Firebase config to `src/firebase/firebaseConfig.js`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start the Development Server:
+   
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   This will run the React development server. You can view the website at `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Folder Structure
 
-### `npm run eject`
+The project folder structure is organized as follows:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **`public/`**: Contains static assets and the main `index.html` file.
+- **`src/`**: Contains all the source code for the React.js frontend.
+  - **`assets/`**: Static assets like images, fonts, etc.
+  - **`components/`**: Reusable components
+    - **`Header/`**: Header component
+    - **`Helmet/`**: Helmet component
+    - **`Layout/`**: Layout components
+      - `Modal.jsx`: Modal component
+      - `PatientForm.jsx`: PatientForm component
+      - `PatientInfo.jsx`: PatientInfo component
+  - **`custom-hooks/`**: Custom React hooks
+  - **`pages/`**: Pages of the application
+    - `ChatBot.jsx`: ChatBot page component
+    - `Home.jsx`: Home page component
+    - `Login.jsx`: Login page component
+    - `Signup.jsx`: Signup page component
+  - **`redux/`**: Redux setup
+  - **`routers/`**: Router setup
+  - **`styles/`**: CSS styles
+    - `App.css`: Global styles
+  - `App.js`: Main application component
+  - `firebase.config.js`: Firebase configuration
+  - `index.js`: Entry point
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Set up Backend
+  
+1. Change the current working directory to "backend"
+  
+```  
+cd backend
+```  
+  
+2. Create a virtual environment  
+  
+```  
+python -m venv .venv  
+```  
+  
+3. Activate .venv  
+  
+```  
+.venv\Scripts\activate  
+```  
+  
+4. Install required libraries and install playwright.  
+  
+```python  
+pip install -r requirements.txt
+playwright install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+5. Download and run Qdrant  
+   For Windows, run these commands from WSL.  
+First, download the latest Qdrant image from Dockerhub:   
+```
+docker pull qdrant/qdrant
+``` 
+Then, run the service:
+```
+docker run -p 6333:6333 -p 6334:6334 \
+    -v $(pwd)/qdrant_storage:/qdrant/storage:z \
+    qdrant/qdrant
+```
+Qdrant is now accessible at `localhost:6333`  
 
-## Learn More
+6. Add API Keys to `.env`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. Check path locations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For Windows - paths are defined by `\\`  
+For Mac OS - paths are defined by `/`  
 
-### Code Splitting
+8. Start API  
+  
+```python  
+uvicorn app:app 
+```
+Do not use `--reload` tag, since the API contains `async` functions. API will break.
+  
+### Project Details  
+  
+**Language Used** - Python 3.9.13  
+**API Framework** - FastAPI    
+  
+### API Endpoints  
+  
+##### /create/req=<json>  
+  
+**\<json\>** - Enter patient json here  
+**Functionality** - Creating a new patient bucket  
+  
+##### /query/req=<json>
+  
+**\<json\>** - JSON must contain `id` and `prompt`  
+**Functionality** - Queries the RAG pipeline   
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+##### /status
+  
+**Functionality** - Returns 200 OK if API is up  
+  
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    
